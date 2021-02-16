@@ -1,7 +1,34 @@
 const fs = require("fs")
 const data = require("./data.json")
+const { age } = require("./utils")
 // ========= CREATE ==============
 
+
+//mostrar instrutor pelo id
+exports.show = function(req, res) {
+    const { id } = req.params
+
+    // localizar instrutor pelo ID
+    const foundInstructor = data.instructors.find(instructor => {
+        return instructor.id == id
+    } )
+
+    // caso não localize instrutor
+    if (!foundInstructor) return res.send('Instrutor não encontrado!')
+
+    // ajustando os valores para enviar ao FRONT
+    const instructor = {
+        ...foundInstructor,
+        age: age(foundInstructor.birth),
+        services: foundInstructor.services.split(","),
+        created_at: new Intl.DateTimeFormat("pt-BR").format(foundInstructor.created_at)
+    }
+
+    return res.render("instructors/show", {instructor : instructor})
+}
+
+
+// criar novo instrutor
 exports.post = function(req, res) {
 
     const keys = Object.keys(req.body)
@@ -44,4 +71,12 @@ exports.post = function(req, res) {
     )
 
     // return res.send(req.body)
+}
+
+// editar dados do instrutor
+exports.edit = function(req, res) {
+    
+
+
+    return res.render("instructors/edit")
 }
