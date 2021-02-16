@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./Assets/favicon_io/favicon.ico"" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css">
+
+    {% block head %}
+    <title>Gym Manager</title>
+    {% endblock %}
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="/">Instructors</a>
+            <a href="/members">Members</a>
+        </nav>
+    </header>
+  {% block content %}   {% endblock %}
+</body>
+</html>
