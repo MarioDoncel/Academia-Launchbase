@@ -1,6 +1,6 @@
 const fs = require("fs")
 const data = require("./data.json")
-const { age } = require("./utils")
+const { age, date } = require("./utils")
 // ========= CREATE ==============
 
 
@@ -75,8 +75,23 @@ exports.post = function(req, res) {
 
 // editar dados do instrutor
 exports.edit = function(req, res) {
+    const { id } = req.params
+
+    // localizar instrutor pelo ID
+    const foundInstructor = data.instructors.find(instructor => {
+        return instructor.id == id
+    } )
+
+    // caso não localize instrutor
+    if (!foundInstructor) return res.send('Instrutor não encontrado!')
+
+    const instructor = {
+        ...foundInstructor,
+        // Convertendo o birth para um formato que o HTML leia usando função do utils.js
+        birth: date(foundInstructor.birth)
+    }
+    
     
 
-
-    return res.render("instructors/edit")
+    return res.render("instructors/edit", {instructor: instructor})
 }
