@@ -171,3 +171,8 @@ a.button {
     text-align: center;
     text-decoration: none;
 }
+
+ button[type="submit"].deleteButton {
+     margin-top: 0;
+    background-color:brown;
+}

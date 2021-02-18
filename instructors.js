@@ -95,3 +95,54 @@ exports.edit = function(req, res) {
 
     return res.render("instructors/edit", {instructor: instructor})
 }
+
+//Atualizar dados
+exports.put = function (req, res) {
+    const { id } = req.body
+
+    // localizar instrutor pelo ID
+    const foundInstructor = data.instructors.find(instructor => {
+        return instructor.id == id
+    } )
+
+    // caso não localize instrutor
+    if (!foundInstructor) return res.send('Instrutor não encontrado!')
+
+    const instructor = {
+        ...foundInstructor,
+        ...req.body,
+        birth: Date.parse(req.body.birth),
+        id:Number(req.body.id)
+    }
+
+    data.instructors[id-1] = instructor
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
+        if (err) {
+            return res.send("Write file error!")
+        }
+        return res.redirect(`/instructors/${id}`)
+    })
+}
+
+
+exports.delete = function (req, res) {
+    const { id } = req.body
+
+    // localizar instrutor pelo ID
+    const foundInstructor = data.instructors.find(instructor => {
+        return instructor.id == id
+    } )
+
+    // caso não localize instrutor
+    if (!foundInstructor) return res.send('Instrutor não encontrado!')
+
+    data.instructors = data.instructors.filter(instructor => id != instructor.id)
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
+        if (err) {
+            return res.send("Write file error!")
+        }
+        return res.redirect(`/instructors`)
+    })
+}
