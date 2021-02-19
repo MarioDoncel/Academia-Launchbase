@@ -1,7 +1,15 @@
 const fs = require("fs")
 const data = require("./data.json")
 const { age, date } = require("./utils")
-// ========= CREATE ==============
+
+
+exports.index = function (req, res) {
+    return res.render("instructors/index", {instructors: data.instructors})
+}
+
+
+
+// ========= CRUD ==============
 
 
 //mostrar instrutor pelo id
@@ -125,7 +133,7 @@ exports.put = function (req, res) {
     })
 }
 
-
+//Deletar 
 exports.delete = function (req, res) {
     const { id } = req.body
 

@@ -8,6 +8,15 @@
       "name": "Mariana Fanaro",
       "created_at": 1613470771539,
       "id": 1
+    },
+    {
+      "avatar_url": "https://images.unsplash.com/flagged/photo-1574005280900-3ff489fa1f70?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8Ym94aW5nfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      "birth": 589161600000,
+      "gender": "M",
+      "services": "Boxe, HIIT",
+      "name": "Mario Doncel",
+      "created_at": 1613727200429,
+      "id": 2
     }
   ]
 }

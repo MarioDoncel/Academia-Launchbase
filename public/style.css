@@ -176,3 +176,57 @@ a.button {
      margin-top: 0;
     background-color:brown;
 }
+
+
+/* ========== INDEX INSTRUCTORS =========  */
+
+.table-container {
+    box-sizing: border-box;
+    display: block;
+    padding: 40px;
+}
+.table-container table {
+    border-spacing: 0;
+}
+.table-container th {
+    text-align: left;
+}
+.table-container th:last-child, tbody tr td:last-child {
+    text-align: center;
+}
+td, th {
+    padding: 16px;
+    border-bottom: 1px solid #d9d9d9;
+}
+th{
+    text-transform: uppercase;
+    color: #777;
+    font-size: 14px;
+}
+tbody tr td:first-child {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    align-items: center;
+}
+tbody tr td:first-child span {
+    width: 48px;
+    height: 48px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    box-shadow: 3px 1px 6px -4px black;
+    border: 2px solid white;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr td:last-child a{
+    background-color: var(--primaryColor);
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    text-transform: uppercase;
+    color: white;
+}
