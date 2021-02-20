@@ -1,16 +1,13 @@
 const fs = require("fs")
-const data = require("./data.json")
-const { age, date } = require("./utils")
+const data = require("../data.json")
+const { age, date } = require("../utils")
 
 
 exports.index = function (req, res) {
     return res.render("instructors/index", {instructors: data.instructors})
 }
 
-
-
-// ========= CRUD ==============
-
+// ========= CRUD INSTRUCTORS ==============
 
 //mostrar instrutor pelo id
 exports.show = function(req, res) {
@@ -34,9 +31,11 @@ exports.show = function(req, res) {
 
     return res.render("instructors/show", {instructor : instructor})
 }
-
-
-// criar novo instrutor
+// criar novo instrutor -Acesso a pagina
+exports.create = function(req, res) {
+    return res.render("instructors/create")
+}
+// criar novo instrutor - envio de dados através do POST
 exports.post = function(req, res) {
 
     const keys = Object.keys(req.body)
@@ -80,7 +79,6 @@ exports.post = function(req, res) {
 
     // return res.send(req.body)
 }
-
 // editar dados do instrutor
 exports.edit = function(req, res) {
     const { id } = req.params
@@ -103,7 +101,6 @@ exports.edit = function(req, res) {
 
     return res.render("instructors/edit", {instructor: instructor})
 }
-
 //Atualizar dados
 exports.put = function (req, res) {
     const { id } = req.body
@@ -132,7 +129,6 @@ exports.put = function (req, res) {
         return res.redirect(`/instructors/${id}`)
     })
 }
-
 //Deletar 
 exports.delete = function (req, res) {
     const { id } = req.body
@@ -154,3 +150,4 @@ exports.delete = function (req, res) {
         return res.redirect(`/instructors`)
     })
 }
+

@@ -185,6 +185,17 @@ a.button {
     display: block;
     padding: 40px;
 }
+.table-container > a{
+    display: inline-block;
+    background-color:cornflowerblue;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    text-transform: uppercase;
+    color: white;
+    margin-bottom: 16px;
+}
+
 .table-container table {
     border-spacing: 0;
 }
