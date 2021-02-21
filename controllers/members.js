@@ -15,18 +15,20 @@ exports.show = function(req, res) {
 
     // localizar membro pelo ID
     const foundMember = data.members.find(member => {
+        
         return member.id == id
+        
     } )
 
     // caso não localize membro
-    if (!foundMember) return res.send('Instrutor não encontrado!')
+    if (!foundMember) return res.send('Membro não encontrado!')
 
     // ajustando os valores para enviar ao FRONT
+    
     const member = {
         ...foundMember,
-        age: age(foundMember.birth),
-        services: foundMember.services.split(","),
-        created_at: new Intl.DateTimeFormat("pt-BR").format(foundMember.created_at)
+        birthDay: date(foundMember.birth).birthDay,
+        blood: foundMember.blood.replace("0","-").replace("1","+")
     }
 
     return res.render("members/show", {member : member})
@@ -52,20 +54,22 @@ exports.post = function(req, res) {
         }
     }
 
-    let {avatar_url, birth, gender, services, name} = req.body
+    let {avatar_url, birth, gender, name, height, weight, email, blood} = req.body
 
     birth = Date.parse(birth)
 
-    const created_at = Date.now()
-    const id = Number(data.members.length+1)
+    const lastId = data.members[data.members.length-1].id
+    const id = Number(lastId+1)
 
     data.members.push({
-        avatar_url,
-        birth,
-        gender,
-        services,
-        name,
-        created_at,
+        avatar_url, 
+        birth, 
+        gender, 
+        name, 
+        height, 
+        weight, 
+        email, 
+        blood,
         id
     })
 
@@ -94,7 +98,7 @@ exports.edit = function(req, res) {
     const member = {
         ...foundMember,
         // Convertendo o birth para um formato que o HTML leia usando função do utils.js
-        birth: date(foundMember.birth)
+        birth: date(foundMember.birth).iso
     }
     
     
@@ -111,7 +115,7 @@ exports.put = function (req, res) {
     } )
 
     // caso não localize membro
-    if (!foundMember) return res.send('Instrutor não encontrado!')
+    if (!foundMember) return res.send('Membro não encontrado!')
 
     const member = {
         ...foundMember,
@@ -120,7 +124,7 @@ exports.put = function (req, res) {
         id:Number(req.body.id)
     }
 
-    data.members[id-1] = member
+    data.members[data.members.indexOf(foundMember)] = member
 
     fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
         if (err) {
@@ -139,8 +143,8 @@ exports.delete = function (req, res) {
     } )
 
     // caso não localize membro
-    if (!found
-        ) return res.send('Instrutor não encontrado!')
+    if (!foundMember) 
+        return res.send('Instrutor não encontrado!')
 
     data.members = data.members.filter(member => id != member.id)
 

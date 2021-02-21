@@ -57,7 +57,8 @@ exports.post = function(req, res) {
     birth = Date.parse(birth)
 
     const created_at = Date.now()
-    const id = Number(data.instructors.length+1)
+    const lastId = data.instructors[data.instructors.length-1].id
+    const id = Number(lastId+1)
 
     data.instructors.push({
         avatar_url,
@@ -94,7 +95,7 @@ exports.edit = function(req, res) {
     const instructor = {
         ...foundInstructor,
         // Convertendo o birth para um formato que o HTML leia usando função do utils.js
-        birth: date(foundInstructor.birth)
+        birth: date(foundInstructor.birth).iso
     }
     
     
@@ -120,7 +121,7 @@ exports.put = function (req, res) {
         id:Number(req.body.id)
     }
 
-    data.instructors[id-1] = instructor
+    data.instructors[data.instructors.indexOf(foundInstructor)] = instructor
 
     fs.writeFile("data.json", JSON.stringify(data, null, 2), err => {
         if (err) {
