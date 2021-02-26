@@ -185,7 +185,7 @@ a.button {
     display: block;
     padding: 40px;
 }
-.table-container > a{
+.table-container .header > a{
     display: inline-block;
     background-color:cornflowerblue;
     padding: 8px 16px;
@@ -193,7 +193,9 @@ a.button {
     border-radius: 6px;
     text-transform: uppercase;
     color: white;
-    margin-bottom: 16px;
+    margin: 16px;
+    text-align: center;
+    width: 240px;
 }
 
 .table-container table {
@@ -240,4 +242,49 @@ tbody tr td:last-child a{
     border-radius: 6px;
     text-transform: uppercase;
     color: white;
+}
+
+/* ======== FILTERS ============ */ 
+.table-container .header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+.table-container .header form {
+    display: flex;
+    align-items: center;
+}
+.table-container .header form input {
+    border: 1px solid #eee;
+    padding: 4px 8px;
+    height: 40px;
+    margin-right: 1rem;
+}
+.table-container .header form button{
+    width: 120px;
+}
+
+/* ======= Pagination ====== */
+
+
+
+.table-container .pagination {
+    margin: 1rem 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+
+.pagination a, 
+.pagination span {
+    display: inline-block;
+    color: var(--primaryColor);
+    text-decoration: none;
+    margin-right: 8px;
+}
+.pagination a:hover {
+    filter: brightness(0.3);
+    border-bottom: 1px solid var(--primaryColor);
 }

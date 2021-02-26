@@ -3,7 +3,11 @@ const { age, date } = require("../../lib/utils")
 
 module.exports = {
     all(callback) {
-        db.query(`SELECT * FROM instructors ORDER BY name ASC`, function(err, results) {
+        db.query(`SELECT instructors.*, count(members) AS total_students
+        FROM instructors 
+        LEFT JOIN members ON (instructors.id = members.instructor_id)
+        GROUP BY instructors.id
+        ORDER BY total_students DESC`, function(err, results) {
             if(err) throw `DATABASE Error!${err}`
 
             callback(results.rows)
@@ -48,6 +52,20 @@ module.exports = {
             callback(results.rows[0])
         })
     },
+    findBy(filter, callback){
+        db.query(`
+        SELECT instructors.*, count(members) AS total_students
+        FROM instructors 
+        LEFT JOIN members ON (instructors.id = members.instructor_id)
+        WHERE instructors.name ILIKE '%${filter}%'
+        OR instructor.services ILIKE '%${filter}%'
+        GROUP BY instructors.id
+        ORDER BY total_students DESC`, function(err, results) {
+            if(err) throw `DATABASE Error!${err}`
+
+            callback(results.rows)
+        })
+    },
 
     update(data, callback) {
         const query=`
@@ -84,6 +102,41 @@ module.exports = {
             callback()
         }
         )
+    },
+    paginate(params){
+        const {filter, limit, offset, callback} = params
+
+        let query = "",
+            filterQuery="",
+            totalQuery=`(
+                SELECT count(*) FROM instructors
+            ) AS total
+            `
+
+        if(filter) {
+            filterQuery=`
+            WHERE instructors.name ILIKE '%${filter}%'
+            OR instructors.services ILIKE '%${filter}%
+            `
+            totalQuery =`(SELECT count(*) FROM instructors
+            ${filterQuery})
+            AS total`
+        }
+
+        query = `SELECT instructors.*,
+        ${totalQuery},
+        count(members) AS total_students
+        FROM instructors
+        LEFT JOIN members ON (instructors.id = members.instructor_id)
+        ${filterQuery}
+        GROUP BY instructors.id
+        LIMIT $1 OFFSET $2
+        `
+        db.query(query,[limit, offset], function (err, results) {
+            if(err) throw `DATABASE Error!${err}`
+
+            callback(results.rows)
+        })
     }
 
 }
