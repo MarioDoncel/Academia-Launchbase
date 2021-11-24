@@ -116,7 +116,7 @@ module.exports = {
         if(filter) {
             filterQuery=`
             WHERE instructors.name ILIKE '%${filter}%'
-            OR instructors.services ILIKE '%${filter}%
+            OR instructors.services ILIKE '%${filter}%'
             `
             totalQuery =`(SELECT count(*) FROM instructors
             ${filterQuery})
@@ -132,6 +132,7 @@ module.exports = {
         GROUP BY instructors.id
         LIMIT $1 OFFSET $2
         `
+    
         const {rows} = await db.query(query,[limit, offset])
         return rows
             
