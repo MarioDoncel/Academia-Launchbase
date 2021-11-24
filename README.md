@@ -143,7 +143,7 @@ Two are shown per page. You can filter the results by name or modality.
 <img src="public/Assets/readmeImages/InstructorDetailsPage.png" width="500px">
 <img src="public/Assets/readmeImages/InstructorEditPage.png" width="500px">
 </div>
-
+<br>
 
 * **Members Page** - Here you can see all Members registered showing their avatars, names, emails, height and weight.
 Two are shown per page. You can filter the results by name or email.
