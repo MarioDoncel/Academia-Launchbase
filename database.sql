@@ -1,6 +1,6 @@
 CREATE DATABASE "gymmanager"
 
-CREATE TABLE "instructors" IF NOT EXISTS (
+CREATE TABLE "instructors" (
     "id"	SERIAL PRIMARY KEY,
     "name"	TEXT NOT NULL,
     "avatar_url" TEXT NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE "instructors" IF NOT EXISTS (
     "created_at" TIMESTAMP DEFAULT(now())		
 );
 
-CREATE TABLE "members" IF NOT EXISTS (
+CREATE TABLE "members" (
     "id"	SERIAL PRIMARY KEY,
     "name"	TEXT NOT NULL,
     "avatar_url" TEXT NOT NULL,
