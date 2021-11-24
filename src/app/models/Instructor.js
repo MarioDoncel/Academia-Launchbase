@@ -103,7 +103,7 @@ module.exports = {
         }
         )
     },
-    paginate(params){
+    async paginate(params){
         const {filter, limit, offset, callback} = params
 
         let query = "",
@@ -132,11 +132,9 @@ module.exports = {
         GROUP BY instructors.id
         LIMIT $1 OFFSET $2
         `
-        db.query(query,[limit, offset], function (err, results) {
-            if(err) throw `DATABASE Error!${err}`
-
-            callback(results.rows)
-        })
+        const {rows} = await db.query(query,[limit, offset])
+        return rows
+            
     }
 
 }

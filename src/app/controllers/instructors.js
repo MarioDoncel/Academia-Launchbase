@@ -2,28 +2,47 @@ const Instructor = require('../models/Instructor')
 const { age, date } = require("../../lib/utils")
 
 module.exports = {
-    index(req, res) {
+    async index(req, res) {
         let {filter, page, limit} = req.query
 
         page = page || 1
         limit = limit || 2
         let offset = limit * (page-1)
 
+        // const params = {
+        //     filter,
+        //     page, 
+        //     limit,
+        //     offset,
+        //     callback(instructors) {
+        //         if (instructors[0]){
+        //             const pagination = {
+        //                 total: Math.ceil(instructors[0].total/limit),
+        //                 page
+        //             }
+        //             return res.render("instructors/index", {instructors,pagination, filter})
+        //         }
+               
+        //         return res.render("instructors/index", {instructors, filter})
+        //         }
+        // }
+
         const params = {
             filter,
             page, 
             limit,
-            offset,
-            callback(instructors) {
-                const pagination = {
-                    total: Math.ceil(instructors[0].total/limit),
-                    page
-                }
-                return res.render("instructors/index", {instructors,pagination, filter})
-                }
+            offset
         }
-
-        Instructor.paginate(params)
+        const instructors = await Instructor.paginate(params)
+        if (instructors[0]){
+            const pagination = {
+                total: Math.ceil(instructors[0].total/limit),
+                page
+            }
+            return res.render("instructors/index", {instructors,pagination, filter})
+        }
+       
+        return res.render("instructors/index", {instructors, filter})
 
        
     },

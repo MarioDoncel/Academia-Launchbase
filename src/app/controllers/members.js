@@ -15,16 +15,17 @@ module.exports = {
                 limit,
                 offset,
                 callback(members) {
-                    const pagination = {
-                        total: Math.ceil(members[0].total/limit),
-                        page
+                    if(members[0]){
+                        const pagination = {
+                            total: Math.ceil(members[0].total/limit),
+                            page
+                        }
+                        return res.render("members/index", {members,pagination, filter})
                     }
-                    return res.render("members/index", {members,pagination, filter})
+                    return res.render("members/index", {members, filter})
                     }
             }
-    
             Member.paginate(params)
-        
     },
     
     // ========= CRUD INSTRUCTORS ==============
