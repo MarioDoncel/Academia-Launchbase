@@ -136,6 +136,7 @@ Finished.
 Two are shown per page. You can filter the results by name or modality.
 <img src="public/Assets/readmeImages/InstructorsPage.png" width="500px">
 
+
 * **Instructors Details/Create/Edit Pages** - Here you have the pages to show, create, edit and delete Instructors.
 <div style="display:flex;">
 <img src="public/Assets/readmeImages/InstructorCreatePage.png" width="500px">
@@ -144,10 +145,10 @@ Two are shown per page. You can filter the results by name or modality.
 </div>
 
 
-
 * **Members Page** - Here you can see all Members registered showing their avatars, names, emails, height and weight.
 Two are shown per page. You can filter the results by name or email.
 <img src="public/Assets/readmeImages/MembersPage.png" width="500px">
+
 
 * **Members Details/Create/Edit Pages** - Here you have the pages to show, create, edit and delete Members.
 <div style="display:flex;">
